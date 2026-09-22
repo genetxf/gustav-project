@@ -87,7 +87,7 @@ const createGuestRow = (guest) => {
                 <button
                  data-action="delete"
                  data-id="${guest.id}"
-                class="p-1 bg-red-500 rounded-sm  text-white cursor-pointer">Delete</button>
+                class="p-1 bg-red-500 rounded-sm  text-white cursor-pointer">Check-Out</button>
                 <button class="p-1 bg-yellow-500 rounded-sm text-white cursor-pointer">Edit</button>
             </td>
         </tr>
