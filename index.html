@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index HTML</title>
+    <title>Gustav</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./engine.js" defer></script>
 </head>
 <body>
     <h1 class="text-center my-2 text-2xl font-bold text-amber-500">Welcome to Gustav</h1>
     <div class="mx-auto max-w-2xl my-6 flex flex-col gap-3">
-        <input class="border-3 border-amber-400 myClass p2 basis-[50%]" type="text" name="guest-name" id="guest-name"
+        <input class="border-3 border-amber-400 myClass p-2 basis-[50%]" type="text" name="guest-name" id="guest-name"
         placeholder="Enter Guest Name">
-        <input class="border-3 border-amber-400 myClass p2 basis-[50%]" type="text" name="guest-phone" id="guest-phone"
+        <input class="border-3 border-amber-400 myClass p-2 basis-[50%]" type="text" name="guest-phone" id="guest-phone"
         placeholder="Enter Guest Phone Number">
-        <select class="border-3 border-amber-400 myClass p2 basis-[50%]" type="text" name="class" id="guest-class">
+        <select class="border-3 border-amber-400 myClass p-2 basis-[50%]" type="text" name="type" id="guest-type">
             <option value="vip">VIP</option>
             <option value="civil">Civil</option>
             <option value="defence">Defence</option>
         </select>
         <button id="guest-add" class="bg-emerald-600 p-2 text-white hover:bg-emerald-700">Check-In</button>
     </div>
-    <table class="ms-auto w-full max-w-2xl my-6 border" id="guest-table">
+    <table class="mx-auto w-full max-w-2xl my-6 border" id="guest-table">
 
     </table>
 </body>
