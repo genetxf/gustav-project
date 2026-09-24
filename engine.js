@@ -21,11 +21,13 @@ let guestList = [
   },
 ];
 
+let editGuestId = null;
+
 const guestTable = document.getElementById("guest-table");
 const guestName = document.getElementById("guest-name");
 const guestPhone = document.getElementById("guest-phone");
 const guestType = document.getElementById("guest-type");
-const guesAdd = document.getElementById("guest-add");
+const guestAdd = document.getElementById("guest-add");
 
 const headerRow = `
         <tr class="border">
@@ -44,18 +46,33 @@ const headerRow = `
         </tr>
 `;
 
-const addGuestList = (guest) => {
+const handleSaveGuest = () => {
     const name = guestName.value;
     const phone = guestPhone.value;
     const type = guestType.value;
-    console.log();
+    
+    if(!name) return;
 
+    if (editGuestId != null) {
+        guestList = guestList.map((guest) => {
+            if (guest.id === editGuestId) {
+                return{...guest, name, phone, type};
+            }
+            return guest;
+        })
+
+        editGuestId= null;
+        guestAdd.innerHTML= "Check-In";
+        guestAdd.classList.replace("bg-amber-600","bg-emerald-600");
+    } 
+    else {
     guestList.push({
         id: Date.now(),
         name,
         phone,
         type,
     });
+}
     guestName.value = "";
     guestPhone.value = "";
 
@@ -67,10 +84,14 @@ const deleteGuest = (id) => {
     render(guestList);
 }
 
-const editGuest = (guest) => {
-    deleteGuest(guest.id);
-    addGuestList(guest);
-}
+const initEditGuest = (id) => {
+    editGuestId = id;
+    const guest = guestList.find((item) => item.id === id)
+    guestName.value = guest.name;
+    guestType.value = guest.type;
+    guestPhone.value = guest.phone || "";
+    guestAdd.innerHTML = "Update";
+};
 
 const createGuestRow = (guest) => {
     return ` <tr class="border">
@@ -88,7 +109,7 @@ const createGuestRow = (guest) => {
                  data-action="delete"
                  data-id="${guest.id}"
                 class="p-1 bg-red-500 rounded-sm  text-white cursor-pointer">Check-Out</button>
-                <button class="p-1 bg-yellow-500 rounded-sm text-white cursor-pointer">Edit</button>
+                <button data-action="edit" data-id="${guest.id}" class="p-1 bg-yellow-500 rounded-sm text-white cursor-pointer hover:bg-yellow-600">Edit</button>
             </td>
         </tr>
     `;
@@ -102,7 +123,7 @@ const render = (guestList) => {
     guestTable.innerHTML = rows;
 };
 
-guesAdd.addEventListener("click", addGuestList);
+guestAdd.addEventListener("click", handleSaveGuest);
 guestTable.addEventListener("click", (event) => {
     const button = event.target.closest("button");
     console.log(button);
@@ -114,6 +135,10 @@ guestTable.addEventListener("click", (event) => {
 
     if(action === "delete") {
         deleteGuest(id);
+    }
+
+    else if(action === "edit") {
+        initEditGuest(id);
     }
 });
 render(guestList);
